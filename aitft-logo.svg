@@ -1,0 +1,37 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>AITFT — AI Team Force</title>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="1480" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10192D"/>
+      <stop offset="1" stop-color="#060A13"/>
+    </linearGradient>
+    <linearGradient id="lime" x1="305" y1="275" x2="565" y2="625" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9FF4B"/>
+      <stop offset="1" stop-color="#A8E936"/>
+    </linearGradient>
+    <filter id="glow" x="190" y="170" width="500" height="570" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" rx="48" fill="url(#bg)"/>
+  <g opacity=".16" stroke="#71809A" stroke-width="1"><path d="M80 130H1520M80 770H1520"/><path d="M112 80V820M1488 80V820"/></g>
+  <!-- Four specialist agents converge on one human-approved outcome. -->
+  <g stroke="#D9FF4B" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M355 324L462 262L569 324"/>
+    <path d="M355 576L462 638L569 576"/>
+    <path d="M310 402L310 498"/>
+    <path d="M614 402L614 498"/>
+    <path d="M354 326L354 574" opacity=".72"/>
+    <path d="M570 326L570 574" opacity=".72"/>
+  </g>
+  <g fill="url(#lime)">
+    <circle cx="310" cy="402" r="28"/><circle cx="310" cy="498" r="28"/>
+    <circle cx="462" cy="262" r="28"/><circle cx="462" cy="638" r="28"/>
+    <circle cx="614" cy="402" r="28"/><circle cx="614" cy="498" r="28"/>
+  </g>
+  <circle cx="462" cy="450" r="106" fill="#D9FF4B"/>
+  <path d="M414 451L446 483L512 413" stroke="#10192D" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="730" y="444" fill="#F4F7FA" font-family="Arial, Helvetica, sans-serif" font-size="174" font-weight="800" letter-spacing="-11">AI<tspan fill="#D9FF4B">TFT</tspan></text>
+  <text x="741" y="520" fill="#9AA7BD" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="600" letter-spacing="8">YOUR AI TEAM, IN SYNC</text>
+</svg>

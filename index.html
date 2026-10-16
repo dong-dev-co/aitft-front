@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Company Tycoon — AI를 직원으로 채용하는 데스크톱 앱</title>
-<meta name="description" content="AI 모델을 직원처럼 채용하고 팀으로 운영하는 로컬 우선 데스크톱 앱. 단일 담당부터 최대 10단계 파이프라인까지 직접 짜고, 문서·이미지 산출물을 만들고, 실행 타임라인과 토큰 사용량을 확인하세요. Claude·GPT·Gemini·NVIDIA NIM·Hugging Face·로컬 모델과 MCP 도구를 지원합니다." />
+<meta name="description" content="AI 모델을 직원처럼 채용하고 팀으로 운영하는 로컬 우선 데스크톱 앱. 단일 담당부터 최대 10단계 파이프라인까지 직접 짜고, 단계마다 남는 기획서·개발 문서와 결과물을 직원별로 검토하세요. 오피스에서 직원이 지금 무엇을 하는지 실시간으로 보이고, 모든 데이터가 기기 간에 동기화됩니다. Claude·GPT·Gemini·NVIDIA NIM·Hugging Face·로컬 모델과 MCP 도구를 지원합니다." />
 <style>
   :root{
     --ink:#182034; --muted:#5b6376; --muted-2:#768096; --line:#e6eaf1;
@@ -73,6 +73,14 @@
   .preview-card h4{margin:0 0 4px;font-size:13.5px}
   .preview-card p{margin:0;font-size:11.5px;color:var(--muted-2)}
   .c1{background:#e9e2ff;color:#704ddd}.c2{background:#ffe7cb;color:#d77b20}.c3{background:#dceeff;color:#3480c9}
+  .preview-card .status{display:flex;align-items:center;gap:6px;margin-top:2px}
+  .preview-card .status i{flex:none;width:7px;height:7px;border-radius:50%;background:#54c68b}
+  .preview-card.working{border-color:#bfe8d2;box-shadow:0 0 0 3px #54c68b14}
+  .preview-card.working .status{color:#23824f;font-weight:650}
+  .preview-card.working .status i{animation:pulse 1.4s ease-in-out infinite}
+  .preview-card.waiting .status i{background:#f0b54a}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 #54c68b80}50%{box-shadow:0 0 0 4px #54c68b00}}
+  @media (prefers-reduced-motion:reduce){.preview-card.working .status i{animation:none}}
 
   /* Sections */
   section{padding:88px 0}
@@ -198,7 +206,7 @@
       <div class="platform-links">
         <a href="https://f.donghyuns.com/v0.3.5/ai-company-tycoon-0.3.5-x64.dmg" download>macOS (Intel) · .dmg</a>
         <a href="https://f.donghyuns.com/v0.3.5/ai-company-tycoon-0.3.5-x64.exe" download>Windows · .exe</a>
-        <a href="https://f.donghyuns.com/v0.3.5/ai-company-tycoon-0.3.5-arm64.deb" download>Linux (ARM64) · .deb</a>
+        <a href="https://f.donghyuns.com/v0.3.5/ai-company-tycoon-0.3.5-amd64.deb" download>Linux (x86_64) · .deb</a>
         <a href="https://f.donghyuns.com/v0.3.5/ai-company-tycoon-0.3.5-x86_64.AppImage" download>Linux (x86_64) · .AppImage</a>
       </div>
       <span class="hero-meta">macOS · Windows · Linux 지원 · 로그인 없이도 전체 기능 사용 가능 · API 키는 직접 준비 (BYOK)</span>
@@ -207,20 +215,20 @@
     <div class="preview" id="preview">
       <div class="preview-chrome"><span></span><span></span><span></span></div>
       <div class="preview-body">
-        <div class="preview-card">
+        <div class="preview-card working">
           <div class="avatar c1">기</div>
           <h4>기획 담당 · Claude</h4>
-          <p>업무 3건 진행 중 · 검토 대기 1건</p>
+          <p class="status"><i></i>「신규 서비스」 기획 작업 중 · 2분째</p>
         </div>
-        <div class="preview-card">
+        <div class="preview-card waiting">
           <div class="avatar c2">개</div>
-          <h4>개발 담당 · Claude</h4>
-          <p>파일 도구 실행 중 · 승인 대기</p>
+          <h4>개발 담당 · DeepSeek</h4>
+          <p class="status"><i></i>「신규 서비스」 앞 단계를 기다리는 중</p>
         </div>
         <div class="preview-card">
           <div class="avatar c3">디</div>
           <h4>디자인 담당 · GPT</h4>
-          <p>업무 대기 중</p>
+          <p>☕ 커피 한 잔 하는 중</p>
         </div>
       </div>
     </div>
@@ -239,13 +247,19 @@
         <div class="icon">👤</div>
         <h3>AI 직원 채용</h3>
         <p>Anthropic·OpenAI·Google 기본 제공, NVIDIA NIM·Hugging Face·로컬 런타임 등 OpenAI 호환 주소는
-        무엇이든 연결로 추가해 직원에게 배정할 수 있습니다.</p>
+        무엇이든 연결로 추가해 직원에게 배정할 수 있습니다. 직원마다 최대 응답 길이도 정합니다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🟢</div>
+        <h3>살아 있는 오피스</h3>
+        <p>직원이 지금 무엇을 하는지 실제 상태로 보여줍니다. 작업 중·앞 단계 대기·막힘·검토 대기, 할 일이
+        없으면 저마다 다른 모습으로 쉬고 있습니다.</p>
       </div>
       <div class="card">
         <div class="icon">🗂️</div>
         <h3>업무 보드</h3>
-        <p>할 일 · 진행 중 · 검토 · 완료로 이어지는 칸반 보드. 칼럼의 이름·색·순서를 바꾸고 필요한 상태를
-        직접 추가할 수 있습니다.</p>
+        <p>할 일 · 진행 중 · 검토 · 완료로 이어지는 칸반 보드. 실행하면 바로 진행 중으로 옮겨지고, 업무
+        수정은 할 일에서만 됩니다. 칼럼의 이름·색·순서를 바꾸고 상태를 직접 추가할 수 있습니다.</p>
       </div>
       <div class="card">
         <div class="icon">🧩</div>
@@ -254,10 +268,16 @@
         10단계)으로 여러 직원이 이어받게 할 수 있습니다.</p>
       </div>
       <div class="card">
+        <div class="icon">📝</div>
+        <h3>단계마다 남는 문서</h3>
+        <p>기획 단계는 기획서를, 작업 단계는 결과 문서를 남깁니다. 개발 단계라면 사용한 언어·구조·실행
+        방법·핵심 코드 설명이 코드와 함께 나옵니다.</p>
+      </div>
+      <div class="card">
         <div class="icon">✅</div>
-        <h3>대표 검토 · 실행 타임라인</h3>
-        <p>어느 직원이 어느 단계를 언제 시작해 얼마나 걸렸는지 막대로 보여줍니다. 산출물을 확인하고
-        승인하면 완료로, 반려하면 이어서 재실행됩니다.</p>
+        <h3>직원별 검토 · 실행 타임라인</h3>
+        <p>초안은 직원별로 묶여 있어, 이름을 누르면 그 직원의 결과물이 앱 안의 보기 창에서 바로 열립니다.
+        누가 어느 단계를 얼마나 걸렸는지도 막대로 보입니다.</p>
       </div>
       <div class="card">
         <div class="icon">🎨</div>
@@ -290,14 +310,20 @@
       <div class="card">
         <div class="icon">🔄</div>
         <h3>기기 간 동기화</h3>
-        <p>Google 계정으로 로그인하면 업무·직원·보드가 다른 기기와 맞춰집니다. 업무별로 켜면 승인한
-        결과물도 다른 기기에서 내려받을 수 있습니다(기본 꺼짐).</p>
+        <p>Google 계정으로 로그인하면 회사·직원·업무·결과물·실행 기록·팀 규칙·모델 연결까지 모두 다른 기기와
+        맞춰집니다. 앱을 열 때, 다시 볼 때, 5분마다. API 키만은 기기에 남습니다.</p>
       </div>
       <div class="card">
         <div class="icon">📎</div>
         <h3>파일 첨부</h3>
         <p>업무를 만들 때 참고 자료를 첨부하면 작업 폴더로 복사되어 직원이 함께 읽습니다. 작업 폴더
         밖의 파일은 읽을 수 없으므로 참조가 아니라 복사됩니다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>업무 기억</h3>
+        <p>반려하면 사유가 직원에게 전달되고, 다시 실행할 때 처음부터가 아니라 이어서 고칩니다. 기획부터
+        다시 할지, 기획은 두고 작업만 다시 할지도 고를 수 있습니다.</p>
       </div>
       <div class="card">
         <div class="icon">💾</div>
@@ -320,22 +346,22 @@
       <div class="flow-row">
         <div class="side left">AI 직원 채용</div>
         <div class="arrow">→</div>
-        <div class="side right">모델 공급자 · 역할 · 권한 · 비용 한도 설정</div>
+        <div class="side right">모델 연결 · 역할 · 전문 분야 · 최대 응답 길이 설정</div>
       </div>
       <div class="flow-row">
         <div class="side left">업무 지시</div>
         <div class="arrow">→</div>
-        <div class="side right">채팅이나 문서에서 만든 구조화된 작업 카드</div>
+        <div class="side right">완료 조건과 담당(또는 파이프라인 단계)이 있는 작업 카드</div>
       </div>
       <div class="flow-row">
         <div class="side left">직원이 일하는 모습</div>
         <div class="arrow">→</div>
-        <div class="side right">모델 실행 상태, 로그, 재시도 상태</div>
+        <div class="side right">실제 실행 상태 — 작업 중 · 대기 · 막힘 · 검토 대기 · 휴식</div>
       </div>
       <div class="flow-row">
         <div class="side left">대표 검토</div>
         <div class="arrow">→</div>
-        <div class="side right">산출물 승인·반려와 후속 업무 생성</div>
+        <div class="side right">직원별 초안과 단계 문서 확인 후 승인·반려</div>
       </div>
     </div>
   </div>
@@ -383,12 +409,12 @@
     <div class="section-head">
       <p class="kicker">Installation</p>
       <h2>설치 방법</h2>
-      <p>아직 노터라이제이션(Apple 공증)을 거치지 않은 빌드입니다. 처음 실행할 때 한 번 허용 절차가 필요합니다.</p>
+      <p>아직 Apple 공증을 거치지 않은 빌드입니다. 처음 실행할 때 한 번 허용 절차가 필요합니다.</p>
     </div>
     <div class="steps">
       <div class="step">
-        <h4>.dmg 다운로드</h4>
-        <p>위 다운로드 버튼으로 원하는 운영체제용 파일을 받습니다. macOS(Apple Silicon·Intel), Windows(.exe), Linux(.deb·.AppImage)를 지원합니다.</p>
+        <h4>설치 파일 다운로드</h4>
+        <p>위 다운로드 버튼으로 원하는 운영체제용 파일을 받습니다. macOS(Apple Silicon·Intel), Windows(.exe), Linux(x86_64 .deb·.AppImage)를 지원합니다.</p>
       </div>
       <div class="step">
         <h4>Applications 폴더로 이동</h4>
@@ -396,12 +422,12 @@
       </div>
       <div class="step">
         <h4>첫 실행 허용</h4>
-        <p>공증되지 않은 앱이라 macOS가 최초 실행을 막을 수 있습니다. 앱 아이콘을 <b>control 키를 누른 채 클릭</b>하고 <b>열기</b>를 선택하세요.</p>
-        <span class="warn">⚠️ "손상되었기 때문에 열 수 없습니다"가 뜨면 터미널에서 <code>xattr -cr /Applications/AI\ Company\ Tycoon.app</code> 실행 후 다시 여세요.</span>
+        <p>처음 열면 "Apple이 확인할 수 없습니다" 경고가 뜹니다. 한 번 열기를 시도한 뒤 <b>시스템 설정 → 개인정보 보호 및 보안</b>에서 <b>그래도 열기</b>를 누르세요. 이후로는 그냥 열립니다. Windows에서는 SmartScreen이 뜨면 <b>추가 정보 → 실행</b>을 누르세요.</p>
+        <span class="warn">⚠️ 이전 버전에서 "손상되었기 때문에 열 수 없습니다"가 떴다면 새 버전을 받거나, 터미널에서 <code>xattr -cr /Applications/AI\ Company\ Tycoon.app</code> 실행 후 다시 여세요.</span>
       </div>
       <div class="step">
         <h4>API 키 연결</h4>
-        <p><b>연결 설정</b>에서 사용할 모델 제공자(Anthropic, OpenAI, Google, NVIDIA NIM, Hugging FACe)의 API 키를 입력합니다. 키는 OS 암호화 저장소에 보관됩니다.</p>
+        <p><b>연결 설정</b>에서 사용할 모델 제공자(Anthropic, OpenAI, Google, NVIDIA NIM, Hugging Face)의 API 키를 입력합니다. 키는 OS 암호화 저장소에 보관됩니다.</p>
       </div>
       <div class="step">
         <h4>AI 직원 채용 후 시작</h4>
@@ -427,6 +453,14 @@
         <p>로그인 자체는 선택이지만, 일단 로그인한 뒤에는 동기화가 자동으로 켜지며 이를 개별적으로 끄는 옵션은 없습니다. 동기화 없이 로그인만 하고 싶다면 로그아웃 상태(로컬 모드)로 사용하세요.</p>
       </details>
       <details>
+        <summary>무엇이 다른 기기로 동기화되나요?</summary>
+        <p>회사·내 프로필, 직원 설정, 업무와 보드, 결과 텍스트·기획 스펙·반려 사유, 실행 기록과 타임라인, 첨부와 승인한 결과물 파일, 토큰 사용량, 모델 연결(주소·모델), 팀 규칙 파일까지 모두입니다. API 키와 MCP 서버 설정, 승인 전 초안만 그 기기에 남습니다. 앱을 열 때, 창으로 돌아올 때, 5분마다, 그리고 무언가를 고친 직후에 맞춰집니다.</p>
+      </details>
+      <details>
+        <summary>응답이 잘렸다는 오류가 나요.</summary>
+        <p>직원의 <b>최대 응답 길이</b>에 걸린 것입니다. 직원 관리에서 그 직원을 열어 값을 늘리세요(256~128,000 토큰). 비워두면 Anthropic은 16,000, 그 밖의 연결은 서버 기본값을 씁니다. 업무를 더 작은 단위로 나누는 것도 방법입니다.</p>
+      </details>
+      <details>
         <summary>API 키는 어디에 저장되나요?</summary>
         <p>운영체제의 암호화 저장소(키체인)에만 저장됩니다. 데이터베이스나 화면 상태에 평문으로 남지 않으며, 기기 간 동기화 대상에도 포함되지 않습니다.</p>
       </details>
@@ -436,7 +470,7 @@
       </details>
       <details>
         <summary>Windows나 Intel Mac도 지원하나요?</summary>
-        <p>네. macOS(Apple Silicon·Intel), Windows(.exe), Linux(.deb·.AppImage) 빌드를 모두 제공합니다. macOS·Linux 빌드는 아직 공증·서명 전이라 첫 실행 시 별도 허용 절차가 필요할 수 있습니다.</p>
+        <p>네. macOS(Apple Silicon·Intel), Windows(.exe), Linux(x86_64 .deb·.AppImage) 빌드를 모두 제공합니다. macOS·Windows 빌드는 아직 Apple 공증·코드 서명 전이라 첫 실행 시 한 번 허용 절차가 필요합니다.</p>
       </details>
       <details>
         <summary>실행 취소나 파일 삭제가 안전한가요?</summary>
@@ -444,7 +478,7 @@
       </details>
       <details>
         <summary>파이프라인은 어떻게 동작하나요?</summary>
-        <p>업무를 만들 때 직원 한 명이 처음부터 끝까지 맡는 단일 담당 대신, 기획·개발·문서·번역 같은 단계를 최대 10개까지 직접 구성해 여러 직원이 순서대로 이어받게 할 수 있습니다. 각 단계의 산출물은 초안(.draft)에 먼저 쌓이고, 검토에서 승인해야 실제 작업 폴더로 옮겨집니다.</p>
+        <p>업무를 만들 때 직원 한 명이 처음부터 끝까지 맡는 단일 담당 대신, 기획·개발·문서·번역 같은 단계를 최대 10개까지 직접 구성해 여러 직원이 순서대로 이어받게 할 수 있습니다. 모든 단계가 문서(기획서, 개발 단계라면 언어·구조·실행 방법·핵심 코드 설명)를 남기고, 산출물은 초안(.draft)에 먼저 쌓입니다. 검토 화면에서 직원별로 확인한 뒤 승인해야 실제 작업 폴더로 옮겨집니다.</p>
       </details>
       <details>
         <summary>MCP 서버를 연결하면 무엇이 위험해지나요?</summary>
@@ -476,7 +510,7 @@
         <a href="https://github.com/dong-dev-co/aitft" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-    <p class="foot-note">AI Company Tycoon은 개발 초기 단계(MVP)입니다. 배포 빌드는 아직 Apple 공증을 거치지 않았습니다.</p>
+    <p class="foot-note">AI Company Tycoon은 개발 초기 단계(MVP)입니다. 배포 빌드는 아직 Apple 공증과 Windows 코드 서명을 거치지 않았습니다.</p>
   </div>
 </footer>
 
